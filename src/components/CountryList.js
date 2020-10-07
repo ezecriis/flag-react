@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Country from './Country';
 import { useSelector, useDispatch } from 'react-redux';
-
-// import Wrapper from './Wrapper';
+import Wrapper from './Wrapper';
 
 const CountryListStyled = styled.div`
     display: grid;
     grid-row-gap: 2.3em;
+    grid-auto-flow: columns;
+    grid-column-gap: 65px;
+    grid-template-columns: repeat(auto-fill, 270px);
     background: var(--background);
     justify-content: center;
-    border: 1px solid red;
-    padding: 4em 2em;
+    padding: 3em 0;
 `
 
 function CountryList() {
@@ -50,22 +51,27 @@ function CountryList() {
     }, [dispatch])
 
     return (
-        <CountryListStyled>
-            {
-                countryList.map(({ name, flag, population, region, capital }) => {
-                    return (
-                        <Country
-                            flag={flag}
-                            name={name}
-                            key={name}
-                            pupulation={population}
-                            region={region}
-                            capital={capital}
-                        />
-                    )
-                })
-            }
-        </CountryListStyled>
+        <Wrapper>
+            <CountryListStyled>
+                {
+                    countryList.map(({ name, flag, population, region, capital, nativeName, cioc, alpha2Code }) => {
+                        return (
+                            <Country
+                                flag={flag}
+                                name={name}
+                                key={name}
+                                pupulation={population}
+                                region={region}
+                                capital={capital}
+                                nativeName={nativeName}
+                                cioc={cioc}
+                                alpha2Code={alpha2Code}
+                            />
+                        )
+                    })
+                }
+            </CountryListStyled>
+        </Wrapper>
     );
 }
 
